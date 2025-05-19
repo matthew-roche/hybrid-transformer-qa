@@ -1,0 +1,20 @@
+[
+    {
+      "context": "The platform supports monthly and yearly subscription cycles. Users are allowed to view detailed subscription usage history.",
+      "question": "Can i view the subscription history ?",
+      "answers": {
+        "text": ["Users are allowed to view detailed subscription usage history."],
+        "answer_start": [63]
+      },
+      "id": "q1"
+    },
+    {
+      "context": "Users can subscribe to the starter plan to access basic features. The ultra subscription includes additional tools and insights. Premium users gain access to priority support and exclusive content.",
+      "question": "what are the subscription tiers ?",
+      "answers": {
+        "text": ["Users can subscribe to the starter plan to access basic features. The ultra subscription includes additional tools and insights. Premium users gain access to priority support and exclusive content."],
+        "answer_start": [0]
+      },
+      "id": "q2"
+    }
+  ]

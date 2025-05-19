@@ -1,0 +1,84 @@
+[
+    {
+        "question": "Can I get the ultra subscription ?",
+        "category": 2,
+        "possibility": 1
+    },
+    {
+        "question": "Can I use the same email to create another account ?",
+        "category": 0,
+        "possibility": 1
+    },
+    {
+        "question": "Can I delete my account without request ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "Can I edit my profile name ?",
+        "category": 0,
+        "possibility": 1
+    },
+    {
+        "question": "Can I edit my profile identity ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "Do i need to use the sign up page ?",
+        "category": 0,
+        "possibility": 1
+    },
+    {
+        "question": "Can I adjust the taxes ?",
+        "category": 5,
+        "possibility": 0
+    },
+    {
+        "question": "Do I need an account to subscribe ?",
+        "category": 0,
+        "possibility": 1
+    }
+    ,
+    {
+        "question": "Can i pay with my local currency ?",
+        "category": 4,
+        "possibility": 1
+    }
+    ,
+    {
+        "question": "Does this support two-factor authentication ?",
+        "category": 0,
+        "possibility": 1
+    },
+    {
+        "question": "My name was misspelled earlier, can I change it in my invoice ?",
+        "category": 5,
+        "possibility": 0
+    },
+    {
+        "question": "Do you allow to skip the first payment cycle ?",
+        "category": 3,
+        "possibility": 0
+    },
+    {
+        "question": "Can I use a disposable email address ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "Can I change the billing address ?",
+        "category": 4,
+        "possibility": 1
+    },
+    {
+        "question": "Is there a way to upload a profile picture ?",
+        "category": 0,
+        "possibility": 1
+    },
+    {
+        "question": "Can I download the subscription  receipt ?",
+        "category": 2,
+        "possibility": 1
+    }
+]
