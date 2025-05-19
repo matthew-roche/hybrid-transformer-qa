@@ -156,7 +156,7 @@ best_model_dict = {}
 best_model_found = False
 best_model_training_curves = {}
 prev_accuracy = 0
-best_accuracy = 50
+best_accuracy = 68
 
 for run in range(num_of_runs):
     print(f"Running Train iteration {run+1}")
