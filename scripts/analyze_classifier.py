@@ -8,7 +8,7 @@ add_project_path()
 from model.classifier_model import Classifier
 from util.helper import plot_training_curves, create_input_tensor, calculate_entropy, possibility_maybe
 
-load_attribute = "591_68_75"
+load_attribute = "597_63_63"
 use_qa_model = True # use answer extraction model alongside the trained classifier
 
 qa_model_dir = huggingface_model_path() / "deberta-v3-base-squad2"
@@ -78,10 +78,11 @@ experiment_curves['possibility_expected_softmax'] = []
 print(f"Results for all test question: \n")
 for question_item in test_dataset:
     question = question_item['question']
-    question_tensor = create_input_tensor(question, english_disctionary).unsqueeze(0).to(device)
+    question_tensor = create_input_tensor(question, english_disctionary, add_pad_token=True).unsqueeze(0).to(device)
+    attention_mask = (question_tensor == 0).to(device)
 
     with torch.no_grad():
-        category_logits, possibility_logits = model(question_tensor)
+        category_logits, possibility_logits = model(question_tensor, attention_mask)
 
     
     cat_probs = F.softmax(category_logits[0], dim=0).cpu()

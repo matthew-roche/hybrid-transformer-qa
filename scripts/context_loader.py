@@ -5,7 +5,7 @@ add_project_path()
 from model.classifier_model import Classifier
 from util.helper import create_input_tensor, calculate_entropy, possibility_maybe
 
-load_attribute = "591_68_75"
+load_attribute = "597_63_63"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # print(device)
 
@@ -55,9 +55,10 @@ def sanitize_question(sentence, word_alias_dictionary, english_list):
 
 def dynamic_context(question, english_dictionary, model, train_categeory_data_json):
     sentence_tensor = create_input_tensor(question, english_dictionary).unsqueeze(0).to(device)
+    attention_mask = (sentence_tensor == 0).to(device)
 
     with torch.no_grad(): # no gradient calc
-        category_logits, possibility_logits = model(sentence_tensor)
+        category_logits, possibility_logits = model(sentence_tensor, attention_mask)
     
     category_predicted = torch.argmax(category_logits).item()
     possibility_predicted = torch.argmax(possibility_logits).item() # either 0-No or 1-Yes
@@ -71,9 +72,10 @@ def dynamic_context(question, english_dictionary, model, train_categeory_data_js
 
 def context_label(question, english_dictionary, model, train_categeory_data_json):
     sentence_tensor = create_input_tensor(question, english_dictionary).unsqueeze(0).to(device)
+    attention_mask = (sentence_tensor == 0).to(device)
 
     with torch.no_grad(): # no gradient calc
-        category_logits, possibility_logits = model(sentence_tensor)
+        category_logits, possibility_logits = model(sentence_tensor, attention_mask)
     
     category_predicted = torch.argmax(category_logits).item()
     possibility_predicted = torch.argmax(possibility_logits).item() # either 0-No or 1-Yes

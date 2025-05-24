@@ -77,7 +77,77 @@
         "possibility": 1
     },
     {
-        "question": "Can I download the subscription  receipt ?",
+        "question": "Can I download the subscription receipt ?",
+        "category": 2,
+        "possibility": 1
+    },
+    {
+        "question": "Is there a way to bypass the verification process ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "Can I upgrade to premium without starter or ultra ?",
+        "category": 3,
+        "possibility": 0
+    },
+    {
+        "question": "Can I set billing limits ?",
+        "category": 5,
+        "possibility": 0
+    },
+    {
+        "question": "Can I enable dark mode ?",
+        "category": 0,
+        "possibility": 1
+    },
+    {
+        "question": "Can I update my username ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "Can I pause my billing subscription ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "As a premium user can I invite members ?",
+        "category": 2,
+        "possibility": 1
+    },
+    {
+        "question": "Can I split payments between multiple cards ?",
+        "category": 5,
+        "possibility": 0
+    },
+    {
+        "question": "Is there an offline billing mode access ?",
+        "category": 5,
+        "possibility": 0
+    },
+    {
+        "question": "Can I downgrade my plan , I already have an active cyle ?",
+        "category": 5,
+        "possibility": 0
+    },
+    {
+        "question": "Can I create a temporary account to preview ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "Can I cancel if the payment is still pending ?",
+        "category": 4,
+        "possibility": 1
+    },
+    {
+        "question": "Can't I access premium features if my account is unverified ?",
+        "category": 1,
+        "possibility": 0
+    },
+    {
+        "question": "Can I earn rewards from subcribing ?",
         "category": 2,
         "possibility": 1
     }

@@ -1,5 +1,6 @@
 import torch
 import matplotlib.pyplot as plt
+import numpy as np
 
 # code from week 5 assignment
 # function to use unique word vocab for embedding
@@ -13,10 +14,32 @@ def add_words_to_dict(word_dictionary, word_list, sentences):
                 word_dictionary[word] = len(word_list)-1
 
 # function to get long tensor based on sentence words, in reference to word_dictionary
-def create_input_tensor(sentence, word_dictionary):
+def create_input_tensor(sentence, word_dictionary, add_pad_token = False, pad_len = 64, pad_token = 0):
     words = sentence.split(" ")
     indices = [word_dictionary[word] for word in words]
+    if add_pad_token and len(indices) < pad_len:
+        padded = indices + [pad_token] * (pad_len - len(indices))
+        return torch.tensor(padded, dtype=torch.long)
+
     return torch.tensor(indices, dtype=torch.long)#.unsqueeze(1)  # LongTensor
+
+def create_input_2d_array(sentence, word_dictionary, add_pad_token = False, pad_len = 64, pad_token = 0):
+    words = sentence.split(" ")
+    indices = [word_dictionary[word] for word in words]
+    if add_pad_token and len(indices) < pad_len:
+        padded = indices + [pad_token] * (pad_len - len(indices))
+        return np.array([padded], dtype=np.int64)
+    
+    return np.array([indices], dtype=np.int64)  # same as torch.long
+
+def create_input_array(sentence, word_dictionary, add_pad_token = False, pad_len = 64, pad_token = 0):
+    words = sentence.split(" ")
+    indices = [word_dictionary[word] for word in words]
+    if add_pad_token and len(indices) < pad_len:
+        padded = indices + [pad_token] * (pad_len - len(indices))
+        return np.array(padded, dtype=np.int64)
+    
+    return np.array(indices, dtype=np.int64)  # same as torch.long
 
 # code from week 4 assignment, modified for category and possibility
 def plot_training_curves(training_curves,

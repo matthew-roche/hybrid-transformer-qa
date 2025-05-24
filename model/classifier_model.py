@@ -34,7 +34,7 @@ class Classifier(nn.Module):
         self.fc_category = nn.Linear(embed_dim, category_count) # categories 0-5 (6)
         self.fc_possibility = nn.Linear(embed_dim, possibility_count) # possibility, no = 0, yes = 1
 
-    def forward(self, x):
+    def forward(self, x, attention_mask):
         """Model forward function
 
         Parameters:
@@ -44,7 +44,7 @@ class Classifier(nn.Module):
         # create embeddings
         x = self.embed(x)
         # attention on the syntactic patterns
-        x = self.transformer(x)
+        x = self.transformer(x, src_key_padding_mask=attention_mask)
 
         # restructure the order for pooling
         x = x.permute(0, 2, 1)

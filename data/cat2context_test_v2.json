@@ -1,0 +1,352 @@
+[
+  {
+    "question":"Can I create an account using a valid email address ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Can I change my password through account settings ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Can I delete my account from the profile page ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Is it possible to reset my password via email or SMS ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Can I add a backup phone number to my account ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Is it possible to export personal data from my account ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Can I download a copy of my account information ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Can I enable or disable biometric login on my account ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Can I save delivery addresses in my account ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Can I deactivate my account temporarily from the menu ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"Am I allowed to use temporary account creation ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to use guest access to account settings ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Can I subscribe to the starter plan to access basic features ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I upgrade my current plan to ultra or premium anytime ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I change my subscription tier at any time ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I set automatic renewal for my current subscription ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I cancel and resubscribe to any plan without penalty ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I trial the ultra plan before committing to it ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I use the platform immediately after subscribing ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I view feature comparisons between subscription tiers ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I receive invoice copies for my subscription via email ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Can I preview what features come with each subscription tier ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"Am I allowed to use subscription-based guest access ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Can I add a credit or debit card to my account ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I download monthly invoices from the billing section ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I update my saved payment methods anytime ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I change my billing address through account settings ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I apply promotional codes during checkout ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I preview upcoming billing dates and amounts ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I switch between monthly and yearly payment options ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I add multiple payment methods to one account ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I review tax information on my invoices ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Can I activate billing alerts via SMS or email ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"Am I allowed to use payments using cryptocurrency ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to use recurring billing outside supported regions ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to use dynamic pricing in billing ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to create an account without a valid email address ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to change your username once it is verified ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to pause their account indefinitely ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to transfer their account data to another user ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to recover an account after it's been permanently deleted ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to create more than one business profile per account ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to undo account deletion once it has been submitted ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to assign admin rights to non-verified users ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to subscribe to more than one plan at the same time ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to use auto-renewal cancellation by email request ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to upgrade to premium without first subscribing to starter or ultra ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to pause their subscription for more than one billing cycle ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to access premium features with a starter plan ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to split a single subscription across team members ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to subscribe to multiple tiers simultaneously ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to subscribe using gift cards or store credit ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to subscribe through third-party platforms ?",
+    "category":3,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to split payments between multiple cards ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to request a refund after 14 days of payment ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to share billing accounts across profiles ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to apply more than one promo code per transaction ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to assign payment roles to non-admin users ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to pause billing once the cycle begins ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"Am I allowed to reverse a completed transaction ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"My name was misspelled earlier, can I change it in my invoice ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"I lost access to my email, am I allowed to update it in the account settings ?",
+    "category":0,
+    "possibility":1
+  },
+  {
+    "question":"I signed up with the wrong region, can I still use my account ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"My trial just ended, can I switch to a monthly plan now ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"I'm sharing my account with a colleague, is that allowed ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"I want to pause my subscription temporarily, is that supported ?",
+    "category":2,
+    "possibility":1
+  },
+  {
+    "question":"My payment failed yesterday, will I lose access immediately ?",
+    "category":4,
+    "possibility":1
+  },
+  {
+    "question":"My account was deactivated, can I get it back without contacting support ?",
+    "category":1,
+    "possibility":0
+  },
+  {
+    "question":"My billing cycle doesn\u2019t align with my salary, can I change the billing date ?",
+    "category":5,
+    "possibility":0
+  },
+  {
+    "question":"I'm on the starter plan, can I access premium content ?",
+    "category":3,
+    "possibility":0
+  }
+]
