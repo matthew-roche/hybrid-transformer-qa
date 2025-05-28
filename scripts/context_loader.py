@@ -38,20 +38,21 @@ def load_classifier():
     return model, english_dictionary, english_list, word_alias_dictionary, train_categeory_data_json
 
 # format question in a way that only accepted vocab used in training is used, otherwise model doesn't understand
-def sanitize_question(sentence, word_alias_dictionary, english_list):
-    sentence = sentence.replace(".", " .")
-    sentence = sentence.replace("?", " ?")
-    words = sentence.split(" ")
-    alias_words = list(word_alias_dictionary.keys())
-    sanitized_words = []
-    for word in words:
-        if word not in english_list:
-            if word in alias_words:
-                sanitized_words.append(word_alias_dictionary[word])
-        else:
-            sanitized_words.append(word)
+# refactor
+# def sanitize_question(sentence, word_alias_dictionary, english_list):
+#     sentence = sentence.replace(".", " .")
+#     sentence = sentence.replace("?", " ?")
+#     words = sentence.split(" ")
+#     alias_words = list(word_alias_dictionary.keys())
+#     sanitized_words = []
+#     for word in words:
+#         if word not in english_list:
+#             if word in alias_words:
+#                 sanitized_words.append(word_alias_dictionary[word])
+#         else:
+#             sanitized_words.append(word)
 
-    return " ".join(sanitized_words)
+#     return " ".join(sanitized_words)
 
 def dynamic_context(question, english_dictionary, model, train_categeory_data_json):
     sentence_tensor = create_input_tensor(question, english_dictionary).unsqueeze(0).to(device)
@@ -88,9 +89,9 @@ def context_label(question, english_dictionary, model, train_categeory_data_json
     return possibility_predicted, train_categeory_data_json[category_predicted]['category_text']
 
 # Custom logic to analyze if Yes/No is needed
-def possibility_needed(question):
-    first_word = question.split(" ")[0]
-    if first_word in ["what", "What", "Where", "where", "How", "how"]: # anyword that doesn't need Yes/No in answer
-        return False
+# def possibility_needed(question):
+#     first_word = question.split(" ")[0]
+#     if first_word in ["what", "What", "Where", "where", "How", "how"]: # anyword that doesn't need Yes/No in answer
+#         return False
     
-    return True
+#     return True

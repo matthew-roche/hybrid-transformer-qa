@@ -2,8 +2,8 @@ from transformers import AutoModelForQuestionAnswering, AutoTokenizer
 import torch
 from add_path import add_project_path, fine_tuned_model_path
 add_project_path()
-from context_loader import load_classifier, sanitize_question, dynamic_context, possibility_needed
-
+from context_loader import load_classifier, dynamic_context
+from util.helper import possibility_needed, sanitize_question
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
 

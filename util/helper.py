@@ -58,10 +58,19 @@ def plot_training_curves(training_curves,
         plt.xlabel('epoch')
         plt.legend(labels=phases)
 
+def softmax_np(x, axis=-1):
+    x_max = np.max(x, axis=axis, keepdims=True)  # for numerical stability
+    e_x = np.exp(x - x_max)
+    return e_x / np.sum(e_x, axis=axis, keepdims=True)
+
 # define a simple entropy function
 def calculate_entropy(probs):
     # Add small epsilon to avoid log(0)
     return -torch.sum(probs * torch.log(probs + 1e-10), dim=0)
+
+def calculate_entropy_np(probs):
+    # Add small epsilon to avoid log(0)
+    return -np.sum(probs * np.log(probs + 1e-10), axis=0)
 
 def possibility_maybe(pos, cat, entropy, entropy_less = 0.6):
     # possibility doesn't match with relevant category
@@ -71,3 +80,37 @@ def possibility_maybe(pos, cat, entropy, entropy_less = 0.6):
     # inconfident
     if entropy > entropy_less:
         return True
+
+# refactored from context_loader.py
+def sanitize_question(sentence, word_alias_dictionary, english_list):
+    sentence = sentence.replace(".", " .")
+    sentence = sentence.replace("?", " ?")
+    words = sentence.split(" ")
+    alias_words = list(word_alias_dictionary.keys())
+    sanitized_words = []
+    for word in words:
+        if word not in english_list:
+            if word in alias_words:
+                sanitized_words.append(word_alias_dictionary[word])
+        else:
+            sanitized_words.append(word)
+
+    return " ".join(sanitized_words)
+
+def possibility_needed(question):
+    first_word = question.split(" ")[0]
+    if first_word in ["what", "What", "Where", "where", "How", "how", "when", "When"]: # anyword that doesn't need Yes/No in answer
+        return False
+    
+    return True
+
+def possiblity_label(possibility):
+    possibility_text = "" # for questions that doesn't need a yes/no
+    if possibility == 1:
+        possibility_text = "Yes"
+    elif possibility == 0:
+        possibility_text = "No"
+    elif possibility == 2:
+        possibility_text = "Maybe" # when model is inconfident
+
+    return possibility_text

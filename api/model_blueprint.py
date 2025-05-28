@@ -11,7 +11,7 @@ from scripts.add_path import add_project_path
 add_project_path()
 
 # import model inference methods
-from api.model_init import torch_device, load_qa_model, load_classifier_to_device, classifier_inference, hybrid_inference
+from api.model_init import torch_device, load_qa_model, load_classifier_to_device, classifier_inference, hybrid_inference, classifier_inference_trt, load_tensorrt_classifier_to_device
 # import model schema to validate input, and structure output for swagger
 from api.model_schema import ModelInputSchema, ClassifierOutputSchema, ModelOutputSchema
 
@@ -33,7 +33,7 @@ model_blueprint = Blueprint("Model Operations", __name__, url_prefix="/api/model
 def device():
     return jsonify({"device": str(torch_device())})
 
-@model_blueprint.route("/test-classification", methods=["POST"])
+@model_blueprint.route("/torch-classifier", methods=["POST"])
 @model_blueprint.arguments(ModelInputSchema)
 @model_blueprint.response(200, ClassifierOutputSchema)
 def classify(input):
@@ -41,10 +41,33 @@ def classify(input):
     possibility_text, context_label = classifier_inference(qs, word_alias_dictionary, classifier_model, english_dictionary, english_list, train_categeory_data_json)
     return jsonify({"possibility": possibility_text, "category": context_label})
 
-@model_blueprint.route("/test-qa", methods=["POST"])
+@model_blueprint.route("/torch-qa", methods=["POST"])
 @model_blueprint.arguments(ModelInputSchema)
 @model_blueprint.response(200, ModelOutputSchema)
 def qa(input):
     qs = input["question"]
     possibility_text, extracted_answer = hybrid_inference(qs, word_alias_dictionary, classifier_model, qa_model, qa_tokenizer, english_dictionary, english_list, train_categeory_data_json)
     return jsonify({"possibility": possibility_text, "answer": extracted_answer})
+
+
+# Tensor RT model
+start_time = time.time()
+engine, context = load_tensorrt_classifier_to_device()
+end_time = time.time()
+print(f"TensorRT Classifier Model load time: {end_time - lap_time:.4f} seconds")
+
+@model_blueprint.route("/tensorrt-classifier", methods=["POST"])
+@model_blueprint.arguments(ModelInputSchema)
+@model_blueprint.response(200, ClassifierOutputSchema)
+def classify_trt(input):
+    qs = input["question"]
+    possibility_text, context_label = classifier_inference_trt(qs, word_alias_dictionary, engine, context, english_dictionary, english_list, train_categeory_data_json)
+    return jsonify({"possibility": possibility_text, "category": context_label})
+
+# @model_blueprint.route("/tensorrt-qa", methods=["POST"])
+# @model_blueprint.arguments(ModelInputSchema)
+# @model_blueprint.response(200, ClassifierOutputSchema)
+# def classify_trt(input):
+#     qs = input["question"]
+#     possibility_text, context_label = classifier_inference_trt(qs, word_alias_dictionary, english_dictionary, english_list, train_categeory_data_json)
+#     return jsonify({"possibility": possibility_text, "category": context_label})
