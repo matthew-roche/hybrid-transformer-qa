@@ -51,6 +51,7 @@ def qa(input):
 
 
 # Tensor RT model
+# Comment if tensorrt package not installed
 start_time = time.time()
 engine, context = load_tensorrt_classifier_to_device()
 end_time = time.time()
