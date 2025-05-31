@@ -34,6 +34,7 @@ This is the project structure:
 │       context_mapper.json
 │       dataset_loader.py
 │       deberta_train.json
+|       inference_test.json
 │       word_alias_mapper.json
 │
 ├───docs
@@ -45,18 +46,37 @@ This is the project structure:
 │
 ├───output
 │   └───models
-│           classifier_591_68_75.pt
-│           english_dictionary_591_68_75.json
-│           english_list_591_68_75.json
-│           training_curves_591_68_75.json
+│       │   classifier_591_68_75.pt
+│       │   classifier_597_63_63.pt
+│       │   english_dictionary_591_68_75.json
+│       │   english_dictionary_597_63_63.json
+│       │   english_list_591_68_75.json
+│       │   english_list_597_63_63.json
+│       │   training_curves_591_68_75.json
+│       │   training_curves_597_63_63.json
+│       │
+│       ├───onnx
+│       │       .gitignore
+│       │       classifier_597_63_63.onnx
+│       │
+│       └───tensorrt
+│               classifier_597_63_63-4.trt
+│               classifier_597_63_63-5.trt
 │
-├───scripts
+scripts
 │       add_path.py
 │       analyze_classifier.py
+│       classifier_to_onnx.py
+│       classifier_to_trt.py
 │       context_loader.py
+│       context_loader_trt.py
 │       deberta_finetune.py
 │       dev_api.py
 │       inference.py
+│       inference_onnx.py
+│       inference_trt.py
+│       qa_to_onnx.py
+│       qa_to_trt.py
 │       train_classifier.py
 │    
 └───util
@@ -146,6 +166,40 @@ Training can be done by executing,
 python <project-dir>/scripts/train_classifier.py
 ```
 
+### Optimizing multimodel for inference (Onnx, TensorRT)
+The process here is torch model to onnx model to tensorrt engine.   
+
+| Files in /Scripts | Purpose |
+| ------------- | ------------- |
+| classifier_to_onnx.py | Loads the torch classifier model, converts to onnx, then asserts the onnx model inference against torch model. |
+| classifier_to_trt.py  | Loads the onnx classifier model, converts to tensorrt engine with optimization profile 5 and max shape (8, 64)  |
+| qa_to_onnx.py | Loads the fine tuned DeBeRtav3 model, converts to onnx, then inferences on onnx runtime to ensure it functions.  |
+| qa_to_trt.py | This will be released after TensorRT Issue#4288 is resolved. |
+| inference_onnx.py | Test onnx performance. Combines onnx classifier model and onnx finetuned DeBeRtaV3 for hybrid inference. |
+| inference_trt.py | Test trt performance. Combines tensorrt classifier engine and torch(cuda) finetuned DeBeRtaV3 for hybrid inference |
+| inference.py | Test raw performance. Combines torch(cuda) classifier engine and torch(cuda) finetuned DeBeRtaV3 for hybrid inference |
+
+### Benchmark   
+
+Execution Computer specifications:   
+| Component     | Specification |
+| ------------- | ------------- |
+| CPU | i5 12600K |
+| RAM | 32GB DDR4 |
+| Storage | nvme ssd |
+| GPU | RTX 4080 super |
+
+#### Results, tested against the questions in /data/inference_test.json   
+
+| File | Run 1 | Run 2 | Run 3 |
+| -----| ----- | ----- | ----- |
+| inference.py | 14.425 | 14.527 | 14.408 |
+| inference_onnx.py | 28.767 | 28.518 | 28.990 |
+| inference_trt.py | 14.252 | 14.363 | 14.331 |
+
+Concludes that the classifier tensorRT engine performs 70 to 170ms faster than with torch(cuda), this is important when combined with the Flask API, especially for batch inference.   
+
+More Updates and Benchnmarks coming soon...   
 
 ## Acknowledgments
 
