@@ -104,13 +104,13 @@ def possibility_needed(question):
     
     return True
 
-def possiblity_label(possibility):
+def possiblity_label(possibility, ignore_maybe=False):
     possibility_text = "" # for questions that doesn't need a yes/no
     if possibility == 1:
         possibility_text = "Yes"
     elif possibility == 0:
         possibility_text = "No"
-    elif possibility == 2:
+    elif possibility == 2 and not ignore_maybe:
         possibility_text = "Maybe" # when model is inconfident
 
     return possibility_text
