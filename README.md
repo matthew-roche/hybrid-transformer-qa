@@ -63,7 +63,7 @@ This is the project structure:
 │               classifier_597_63_63-4.trt
 │               classifier_597_63_63-5.trt
 │
-scripts
+├───scripts
 │       add_path.py
 │       analyze_classifier.py
 │       classifier_to_onnx.py
@@ -201,7 +201,7 @@ Execution Computer specifications:
 
 #### Results, tested against the questions in /data/inference_test.json   
 
-| File | Run 1 | Run 2 | Run 3 |
+| File Refererence | Run 1 /s | Run 2 /s | Run 3 /s |
 | -----| ----- | ----- | ----- |
 | inference.py | 14.425 | 14.527 | 14.408 |
 | inference_onnx.py | 28.767 | 28.518 | 28.990 |
