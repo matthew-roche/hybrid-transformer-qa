@@ -108,7 +108,17 @@ Then on windows, the virtual env can be activated by
 Afterwards, Install the packages from ```requirements.txt```, can be done using;
 ```
 pip install -r <project-dir>/requirements.txt
-```   
+```
+
+##### TensorRT SDK for inference, and optimization
+After installing the packages, download the appropiate tensorRT SDK from https://developer.nvidia.com/tensorrt. This project was built using TensorRT 10.11.0.33 version.    
+
+After downloaded, copy the contents to a folder accessible to the python enviornment, then install the tensorrt-<version>-cp<python>-none-<os>-<arch>.whl from the python folder inside the contents.
+For instance,
+```
+pip install TensorRT-10.11.0.33/python/tensorrt-10.11.0.33-cp313-none-win_amd64
+```
+Other types such as dispatch can also be used if the motive is to inference and not to optimize the engine.   
 
 #### STEP 4
 ```
