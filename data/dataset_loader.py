@@ -35,7 +35,7 @@ def train_data_processor(json_context_list, word_dictionary, word_list, pick_uni
                 train_obj['sentence'] = sentence
                 add_words_to_dict(word_dictionary, word_list, [s])
 
-                sentence_tensor = create_input_tensor(s, word_dictionary)
+                sentence_tensor = create_input_tensor(s, word_dictionary, add_pad_token=True)
                 category_tensor = torch.tensor(id, dtype=torch.long)
                 possibility_tensor = torch.tensor(possibility, dtype=torch.long)
 
@@ -55,7 +55,7 @@ def test_data_processor(json_question_list, word_dictionary, word_list, device):
         question_sentence = qa['question']
 
         add_words_to_dict(word_dictionary, word_list, [question_sentence])
-        question_tensor = create_input_tensor(question_sentence, word_dictionary)
+        question_tensor = create_input_tensor(question_sentence, word_dictionary, add_pad_token=True)
         category_tensor = torch.tensor(qa['category'], dtype=torch.long)
         possibility_tensor = torch.tensor(qa['possibility'], dtype=torch.long)
 

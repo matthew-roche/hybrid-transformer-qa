@@ -18,6 +18,7 @@ print(f"torch device: {device}")
 word_dictionary = {}
 word_list = []
 add_words_to_dict(word_dictionary, word_list, ['PAD']) # PAD_TOKEN in index 0
+PAD_TOKEN_INDEX = 0
 
 filename = "cat2context_train.json"
 file_path = os.path.join(data_path(), filename)
@@ -69,6 +70,7 @@ def train_model(model, optimizer, scheduler, dataset, criterion_category, criter
         model.train()
         train_cat_loss, train_pos_loss = 0, 0
         for idx, sentences_chunk in enumerate(dataset['train']):
+            # in case of training data len mismatches
             batch_array = []
             cat_array = []
             pos_array = []
@@ -77,12 +79,14 @@ def train_model(model, optimizer, scheduler, dataset, criterion_category, criter
                 cat_array.append(sentence_obj['category_tensor'])
                 pos_array.append(sentence_obj['possibility_tensor'])
             
-            sentence_batch = pad_sequence(batch_array, batch_first=True, padding_value=0) # pad token 0
+            sentence_batch = pad_sequence(batch_array, batch_first=True, padding_value=PAD_TOKEN_INDEX) # pad token 0
+            attention_mask = (sentence_batch == 0).to(device)
+
             category_batch = torch.tensor(cat_array, dtype=torch.long).to(device)
             possibility_batch = torch.tensor(pos_array, dtype=torch.long).to(device) 
 
             optimizer.zero_grad()  # reset gradient params
-            category_logits, possibility_logits = model(sentence_batch) # classification results as logits
+            category_logits, possibility_logits = model(sentence_batch, attention_mask) # classification results as logits
 
             # batch loss calculation
             loss_cat = criterion_category(category_logits, category_batch)
@@ -105,7 +109,9 @@ def train_model(model, optimizer, scheduler, dataset, criterion_category, criter
         test_cat_loss_total, test_pos_loss_total = 0, 0
         cat_correct, pos_correct = 0, 0
         for idx, test_item in enumerate(dataset['test']):
-            question_tensor = test_item['question_tensor'].unsqueeze(0) #reshape from [..] to [[..]]
+            question_tensor = test_item['question_tensor'].unsqueeze(0) #.unsqueeze(0) #reshape from [..] to [[..]]
+            attention_mask = (question_tensor == 0).to(device)
+
             category_tensor = test_item['category_tensor'].unsqueeze(0)
             possibility_tensor = test_item['possibility_tensor'].unsqueeze(0)
 
@@ -113,7 +119,7 @@ def train_model(model, optimizer, scheduler, dataset, criterion_category, criter
             possibility_expected = torch.tensor(test_item['possibility'], dtype=torch.long).to(device)
 
             with torch.no_grad():
-                category_logits, possibility_logits = model(question_tensor)
+                category_logits, possibility_logits = model(question_tensor, attention_mask)
                 test_loss_cat = criterion_category(category_logits, category_tensor)
                 test_loss_pos = criterion_pos(possibility_logits, possibility_tensor)
 
@@ -145,7 +151,7 @@ def train_model(model, optimizer, scheduler, dataset, criterion_category, criter
     return model, training_curves, final_accuracy
 
 learn_rate = 0.00038
-num_of_runs = 10
+num_of_runs = 1000
 train_epochs = 20
 
 # multi class classification with digit labels
@@ -156,7 +162,7 @@ best_model_dict = {}
 best_model_found = False
 best_model_training_curves = {}
 prev_accuracy = 0
-best_accuracy = 68
+best_accuracy = 61
 
 for run in range(num_of_runs):
     print(f"Running Train iteration {run+1}")

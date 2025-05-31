@@ -1,7 +1,9 @@
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer
 import torch, os
-from scripts.context_loader import load_classifier, sanitize_question, dynamic_context, possibility_needed, context_label
+from scripts.context_loader import load_classifier, dynamic_context, context_label
+from scripts.context_loader_trt import load_tensorrt_classifier_engine, dynamic_context_trt, context_label_trt
 from scripts.add_path import fine_tuned_model_path
+from util.helper import possibility_needed, sanitize_question, possiblity_label
 
 save_m_dir = fine_tuned_model_path() / "deberta-v3-base-fine-tuned"
 save_t_dir = fine_tuned_model_path() / "deberta-v3-base-fine-tuned-token"
@@ -29,10 +31,7 @@ def classifier_inference(question, word_alias_dictionary, model, english_diction
 
     possibility_text = ""
     if possibility_needed_:
-        if possibility == 1:
-            possibility_text = "Yes"
-        elif possibility == 0:
-            possibility_text = "No"
+        possibility_text = possiblity_label(possibility)
 
     return possibility_text, context
 
@@ -70,9 +69,25 @@ def hybrid_inference(question, word_alias_dictionary, classifier_model, qa_model
 
     possibility_text = ""
     if possibility_needed_:
-        if possibility == 1:
-            possibility_text = "Yes"
-        elif possibility == 0:
-            possibility_text = "No"
+        possibility_text = possiblity_label(possibility)
 
     return possibility_text, qa_extracted_answer
+
+
+# Tensor rt
+
+def load_tensorrt_classifier_to_device():
+    return load_tensorrt_classifier_engine()
+
+def classifier_inference_trt(question, word_alias_dictionary, engine, context, english_dictionary, english_list, train_categeory_data_json):
+    
+    sanitized_question = sanitize_question(question, word_alias_dictionary, english_list)
+    possibility_needed_ = possibility_needed(question)
+
+    possibility, context_label, inference_time = context_label_trt(sanitized_question, english_dictionary, engine, context, train_categeory_data_json) # get the context based on classifier predicted category
+
+    possibility_text = ""
+    if possibility_needed_:
+        possibility_text = possiblity_label(possibility)
+
+    return possibility_text, context_label
