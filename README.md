@@ -172,9 +172,9 @@ The process here is torch model to onnx model to tensorrt engine.
 | Files in /Scripts | Purpose |
 | ------------- | ------------- |
 | classifier_to_onnx.py | Loads the torch classifier model, converts to onnx, then asserts the onnx model inference against torch model. |
-| classifier_to_trt.py  | Loads the onnx classifier model, converts to tensorrt engine with optimization profile 5 and max shape (8, 64)  |
+| classifier_to_trt.py  | Loads the onnx classifier model, converts to tensorrt engine with optimization profile 5 and max shape (8, 64). Means 8 batches with 64 max size. |
 | qa_to_onnx.py | Loads the fine tuned DeBeRtav3 model, converts to onnx, then inferences on onnx runtime to ensure it functions.  |
-| qa_to_trt.py | This will be released after TensorRT Issue#4288 is resolved. |
+| qa_to_trt.py | This will be released after [TensorRT Issue#4288](https://github.com/NVIDIA/TensorRT/issues/4288#issue) is resolved. |
 | inference_onnx.py | Test onnx performance. Combines onnx classifier model and onnx finetuned DeBeRtaV3 for hybrid inference. |
 | inference_trt.py | Test trt performance. Combines tensorrt classifier engine and torch(cuda) finetuned DeBeRtaV3 for hybrid inference |
 | inference.py | Test raw performance. Combines torch(cuda) classifier engine and torch(cuda) finetuned DeBeRtaV3 for hybrid inference |
