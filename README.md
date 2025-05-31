@@ -16,7 +16,7 @@ Benefits of this approach:
 5. Not fully dependent on DeBERTa v3, and another answer extraction model like RoBERTa can be used instead.   
 6. Sanitizing question to work on trained vocabulary only.    
 
-Refer [Model Simplified Flowchart](https://) for more details on how the 2 models work together.
+Refer [Model Simplified Flowchart](https://github.com/matthew-roche/hybrid-transformer-qa/blob/main/docs/hybridqa.drawio.png) for more details on how the 2 models work together.
 
 This project contains the dataset used to train, in directory ```/data/cat2context_train.json```, this dataset can be modified to fit the business context.   
 And the test dataset is in ```/data/cat2context_test.json```, this contains questions to see how well the model has learned the category and possiblity.   
@@ -86,7 +86,7 @@ scripts
 ## Getting started guide   
 Based on Python version [3.13.2](https://www.python.org/downloads/release/python-3132/)   
 
-This repository includes a backend API for continous inference and testing purposes, after the steps from 1 to 4 below are completed, skip to "Dev API Inference" section.    
+This repository includes a backend API for continous inference and testing purposes, after the steps from 1 to 4 below are completed, skip to [Dev API Inference section](https://github.com/matthew-roche/hybrid-transformer-qa?tab=readme-ov-file#dev-api-inference-requires-steps-1-to-4-from-above).    
 
 ### Installation, Analysis & Inference
 
@@ -139,10 +139,10 @@ python <project-dir>/scripts/analyze_classifier.py
 ```
 This will load both DeBERTa v3 and classifier models to run inference against the test dataset, and at the end it will show a series of graphs to indicate how the trained classifier model is performing on unseen test data. These graphs are included under ```docs``` in this repository as well.   
 
-[Training Loss curve, across epochs](https://)   
-[Test dataset accuracy, across epochs](https://)   
-[Category Softmax curves](https://)   
-[Possibility Softmax curves](https://)   
+[Training Loss curve, across epochs](https://github.com/matthew-roche/hybrid-transformer-qa/blob/main/docs/train_curves.png)     
+[Test dataset accuracy, across epochs](https://github.com/matthew-roche/hybrid-transformer-qa/blob/main/docs/test_data_epochs.png)     
+[Category Softmax curves](https://github.com/matthew-roche/hybrid-transformer-qa/blob/main/docs/category_softmax.png)    
+[Possibility Softmax curves](https://github.com/matthew-roche/hybrid-transformer-qa/blob/main/docs/possibility_softmax.png)    
 
 #### STEP 6
 After the classifier and DeBERTa functionality is analyzed, now run the command below to test how the fine tuned model performs with the classifier.
