@@ -200,7 +200,9 @@ Execution Computer specifications:
 | GPU | RTX 4080 super |
 
 #### Results, tested against the questions in /data/inference_test.json   
-
+Classifier average inference time per question: 4.4ms   
+DeBERTa v2 average inference time in pipeline: 943.8ms   
+Total inference time for 15 zero-shot questions:    
 | File Refererence | Run 1 /s | Run 2 /s | Run 3 /s |
 | -----| ----- | ----- | ----- |
 | inference.py | 14.425 | 14.527 | 14.408 |
