@@ -217,4 +217,4 @@ More Updates and Benchnmarks coming soon...
 - [Huggingface DeBERTa v3 base squad2 from deepset](https://huggingface.co/deepset/deberta-v3-base-squad2)   
 - [Huggingface Trainer Documentation](https://huggingface.co/docs/transformers/en/main_classes/trainer)
 - [matplotlib Documentation](https://matplotlib.org/stable/tutorials/pyplot.html)   
-- Developed as part of the MIT xPRO course: *Deep Learning – Mastering Neural Networks (2025 Feb Cohort)*
+- Inspired by LSTMS from the MIT xPRO course: *Deep Learning – Mastering Neural Networks (2025 Feb Cohort)*
